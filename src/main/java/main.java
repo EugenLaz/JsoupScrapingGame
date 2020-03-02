@@ -11,7 +11,7 @@ public class main {
         System.out.println(getRandomProduct(getProductsFromRandomPage()));
     }
 
-    public static String getToСategory(CATEGORIES category) throws IOException {
+    public static String getToCategory(CATEGORIES category) throws IOException {
         Document doc;
         doc = Jsoup.connect(category.getLink()).get();
         return doc.getElementsByClass("tile-cats__heading").get(0).attr("href") + "/page=PageNumber;sort=novelty/";
@@ -19,7 +19,7 @@ public class main {
 
     public static List getProductsFromRandomPage() throws IOException {
         Document doc;
-        doc = Jsoup.connect(getToСategory(CATEGORIES.HEALTH)
+        doc = Jsoup.connect(getToCategory(CATEGORIES.HEALTH)
                 .replace("PageNumber", String.valueOf(Math.random() * 10))
         ).get();
         List<Element> elementList = doc.body().getElementsByClass("catalog-grid__cell catalog-grid__cell_type_slim");
