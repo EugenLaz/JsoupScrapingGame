@@ -19,6 +19,7 @@ public class Product {
         this.photo = photo;
         this.description = description;
         this.price = price;
+        System.out.println(photo.getAbsolutePath());
     }
 
     public File getPhoto() {

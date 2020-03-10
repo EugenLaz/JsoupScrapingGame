@@ -2,12 +2,15 @@ package Service;
 
 import entity.CATEGORIES;
 import entity.Product;
+import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 public class GameService {
@@ -48,10 +51,20 @@ public class GameService {
                 .replaceAll("\\([^)]*\\)", ""); //deleting all access codes from Name of the product
         int productPrice =
                 Integer.valueOf(productList.getElementsByClass("goods-tile__price-value").text().replaceAll(" ", ""));
-        String photoLink =
-                productList.getElementsByClass("lazy_img_hover display-none").attr("data-url");
-
-        return new Product(productName,productPrice,new File(photoLink));
+         URL photoLink = null;
+         try {
+             photoLink = new URL(
+                     productList.getElementsByClass("lazy_img_hover display-none").attr("data-url"));
+         } catch (MalformedURLException e) {
+             e.printStackTrace();
+         }
+         File file = new File("resources/images/");
+         try {
+             FileUtils.copyURLToFile(photoLink,file);
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+         return new Product(productName,productPrice,file);
     }
 
 

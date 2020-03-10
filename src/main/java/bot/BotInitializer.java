@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.ApiContext;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
-
+import org.telegram.telegrambots.meta.generics.BotOptions;
 
 
 public final class BotInitializer {
